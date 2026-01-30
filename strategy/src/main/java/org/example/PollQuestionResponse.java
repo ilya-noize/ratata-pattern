@@ -3,6 +3,6 @@ package org.example;
 import java.util.List;
 
 public record PollQuestionResponse(
-        PollQuestion pollQuestion,
+        Question question,
         List<String> selectedVariants) {
 }

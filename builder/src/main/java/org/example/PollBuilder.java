@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PollBuilder {
     private String name;
-    private List<Question> questions;
+    private final List<Question> questions;
 
     public PollBuilder() {
         this.questions = new ArrayList<>();
@@ -21,7 +21,7 @@ public class PollBuilder {
     }
 
     public QuestionBuilder pollQuestion(String title) {
-        return new QuestionBuilder(this);
+        return new QuestionBuilder(this).title(title);
     }
 
     public QuestionBuilder oneVariantQuestion(String title) {
@@ -29,6 +29,16 @@ public class PollBuilder {
                 .title(title)
                 .min(1)
                 .max(1);
+    }
+
+    public PollBuilder yesNoQuestion(String title) {
+        return new QuestionBuilder(this)
+                .title(title)
+                .min(1)
+                .max(1)
+                .answerVariant("Yes")
+                .answerVariant("No")
+                .and();
     }
 
     public PollBuilder addQuestion(Question question) {
