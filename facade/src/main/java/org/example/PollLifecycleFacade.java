@@ -1,12 +1,13 @@
 package org.example;
 
+import org.example.strategy.FullCountStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class PollLifecycleFacade {
-
 
     public Poll createPoll() {
         return Poll.builder()
@@ -70,7 +71,8 @@ public class PollLifecycleFacade {
     }
 
     public void makeAnalyzePoll(List<PollFillingData> pollFillingDataList) {
-
+        AnalyzeStrategy strategy = new FullCountStrategy();
+        new PollAnalyzer(strategy).analyzePoll(pollFillingDataList);
     }
 
     private PollFillingData generateRandomFillingData(Poll poll) {
